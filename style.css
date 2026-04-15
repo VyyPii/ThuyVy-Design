@@ -563,10 +563,9 @@ html, body {
 
 @media print {
 
-  /* ===== PAGE SETUP ===== */
   @page {
     size: A4;
-    margin: 0;
+    margin: 12mm;
   }
 
   html, body {
@@ -574,121 +573,51 @@ html, body {
     padding: 0 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    font-family: 'Roboto', sans-serif;
   }
 
-  /* ===== PAGE WRAPPER (QUAN TRỌNG NHẤT) ===== */
-  .page {
-    width: 210mm;
-    height: 297mm;
-    padding: 12mm;
-    box-sizing: border-box;
-    page-break-after: always;
-    background: white;
-  }
-
-  .page:last-child {
-    page-break-after: auto;
-  }
-
-  /* ===== LAYOUT TRONG MỖI TRANG ===== */
-  .sidebar {
-    width: 35%;
-    float: left;
-    padding-right: 10px;
-  }
-
-  .main-content {
-    width: 65%;
-    float: right;
-  }
-
-  /* Clear float */
-  .page::after {
-    content: "";
-    display: block;
-    clear: both;
-  }
-
-  /* ===== RESET WEB LAYOUT GÂY LỖI ===== */
+  /* ❗ GIỮ NGUYÊN LAYOUT 2 CỘT */
   .cv-container {
-    display: block !important;
-    max-width: none !important;
+    transform: scale(0.85);
+    transform-origin: top center;
+    width: 117%;
+    margin: 0 auto;
     box-shadow: none !important;
   }
 
-  section {
-    margin-bottom: 10px;
-  }
-
-  /* ===== TEXT ===== */
-  h1 {
-    font-size: 18px;
-  }
-
-  h3 {
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-
-  h4 {
-    font-size: 13px;
-  }
-
-  p, li {
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  /* ===== AVATAR ===== */
-  .avatar-container {
-    width: 80px;
-    height: 80px;
-    border-width: 3px;
-  }
-
-  /* ===== GRID FIX ===== */
-  .interests_grid,
-  .abilities-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-
-  /* ===== SKILL BAR ===== */
-  .progress_bar {
-    height: 5px;
-    width: 100%;
-  }
-
-  /* ===== EXPERIENCE HEADER ===== */
-  .experience_topic {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-
-  .topic_icon_wrapper {
-    width: 20px;
-    height: 20px;
-  }
-
-  .experience_topic h3 {
-    border: none;
-    padding: 0;
-  }
-
-  /* ===== TRÁNH BỊ CẮT NỘI DUNG ===== */
+  /* ❗ KHÔNG CHO NHẢY BỪA */
   .experience-item,
-  .education-item,
-  .project_item {
+  .education-item {
     page-break-inside: avoid;
   }
 
-  /* ===== ẨN ELEMENT KHÔNG CẦN ===== */
+  /* ❗ CHỈ CHIA TRANG 1 LẦN DUY NHẤT */
+  .experience_topic {
+    page-break-before: always;
+  }
+
+  /* ❗ GIẢM GRID CHO VỪA */
+  .interests_grid,
+  .abilities-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* ❗ GỌN SPACING */
+  section {
+    margin-bottom: 8px !important;
+  }
+
+  .experience-item {
+    margin-bottom: 6px !important;
+  }
+
+  /* ❗ SKILL BAR */
+  .progress_bar {
+    height: 5px;
+  }
+
+  /* ❗ ẨN NÚT */
   .dark-mode-toggle {
-    display: none !important;
+    display: none;
   }
 
 }
