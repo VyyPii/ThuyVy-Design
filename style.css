@@ -562,46 +562,41 @@ html, body {
 }
 
 @media print {
-    /* 1. Cấu hình trang in và loại bỏ lề thừa của trình duyệt */
+    /* 1. Reset trang in */
     @page {
         size: A4;
-        margin: 5mm 10mm !important;
+        margin: 5mm 8mm !important;
     }
 
-    /* 2. Ép toàn bộ CV về 1 trang và nén diện tích */
     body {
-        font-size: 12.5px !important;
-        line-height: 1.3 !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
         margin: 0 !important;
         padding: 0 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    .wrap_page {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    /* 3. FIX LỖI: Ép Icon và Tiêu đề (Experience, Project...) lên cùng 1 dòng */
+    /* 2. ÉP ICON VÀ CHỮ LÊN 1 DÒNG - Triệt tiêu mọi yếu tố gây xuống dòng */
     .experience_topic {
         display: flex !important;
-        flex-direction: row !important; /* Đảm bảo nằm ngang */
-        align-items: center !important; 
-        gap: 10px !important;
-        margin: 5px 0 !important; /* Nén khoảng cách trên dưới */
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        margin: 4px 0 !important;
         border-bottom: 1px dashed #ccc !important;
-        padding-bottom: 3px !important;
+        padding-bottom: 2px !important;
+        width: 100% !important;
     }
 
-    /* Chỉnh kích thước wrapper chứa icon */
+    /* Đảm bảo wrapper không chiếm hết chiều ngang */
     .topic_icon_wrapper {
-        width: 28px !important;
-        height: 28px !important;
-        margin: 0 !important; /* Xóa margin gây lệch dòng */
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+        display: inline-flex !important;
+        width: 25px !important;
+        height: 25px !important;
+        flex-shrink: 0 !important; /* Không cho icon bị bóp méo */
+        margin: 0 !important;
     }
 
     .topic_icon {
@@ -609,33 +604,43 @@ html, body {
         height: auto !important;
     }
 
+    /* Triệt tiêu thuộc tính block của H3 */
     .experience_topic h3 {
-        margin: 0 !important;
-        font-size: 16px !important;
         display: inline-block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 15px !important;
+        white-space: nowrap !important; /* Buộc chữ không được xuống dòng */
     }
 
-    /* 4. Nén các mục nội dung bên dưới */
+    /* 3. NÉN NỘI DUNG (Để vừa 1 trang) */
     section {
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
     }
 
     .experience-item {
-        margin-bottom: 4px !important;
+        margin-bottom: 3px !important;
         page-break-inside: avoid !important;
     }
 
     .experience-item h4 {
-        margin: 2px 0 0 0 !important;
+        margin: 0 !important;
+        font-size: 13px !important;
     }
 
     .experience-item ul {
         margin: 0 !important;
+        padding-left: 15px !important;
     }
 
-    /* 5. Triệt tiêu các lệnh ngắt trang */
+    /* 4. CHỐNG NHẢY TRANG */
     * {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
+    }
+
+    .wrap_page {
+        height: auto !important;
+        overflow: visible !important;
     }
 }
