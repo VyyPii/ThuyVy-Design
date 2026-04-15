@@ -562,35 +562,35 @@ html, body {
 }
 
 @media print {
-    /* 1. Ngăn tất cả các khối nội dung bị cắt đôi dòng chữ */
-    .experience-item, section {
+    /* 1. Ngăn tất cả các khối nhỏ bị cắt đôi dòng chữ */
+    .experience-item {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
         display: block !important;
+        margin-bottom: 20px !important;
     }
 
-    /* 2. CHỈ ép phần EDUCATION và PROJECT nhảy sang trang mới nếu cần */
-    /* Điều này giúp Experience nằm ở trang 1, còn các phần sau tự động sang trang 2 */
-    section:nth-of-type(2), 
+    /* 2. CHỈ ép phần EDUCATION nhảy sang trang mới (Section thứ 2) */
+    /* Điều này giúp Experience nằm trang 1, còn Education & Project tự sang trang 2 */
+    section:nth-of-type(2) {
+        page-break-before: always !important;
+        break-before: page !important;
+        margin-top: 50px !important; /* Tạo khoảng trống đầu trang mới */
+    }
+
+    /* 3. Phần Project (Section thứ 3) nếu quá dài thì để nó tự xuống trang 3 */
     section:nth-of-type(3) {
-        page-break-before: auto !important; /* Để trình duyệt tự tính toán chỗ trống */
-    }
-
-    /* 3. Tạo khoảng cách an toàn cho các tiêu đề (Experience, Education, Project) */
-    .experience_topic {
+        page-break-before: auto !important;
         margin-top: 30px !important;
-        margin-bottom: 15px !important;
-        /* Giúp tiêu đề không bao giờ nằm một mình ở cuối trang */
-        page-break-after: avoid !important; 
     }
 
-    /* 4. Giữ màu sắc cho Icon và Role */
-    .topic_icon, .role, h3 {
+    /* 4. Giữ màu sắc icon và font chữ xanh của Vy */
+    .topic_icon, .role, .experience_topic h3 {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* 5. Thiết lập lề trang in chuẩn A4 */
+    /* 5. Ép lề trang in chuẩn để không bị sát mép */
     @page {
         size: A4;
         margin: 15mm 10mm;
