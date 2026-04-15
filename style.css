@@ -602,6 +602,41 @@ html, body {
         margin-bottom: 0 !important;
     }
 
+    /* 1. Ép Icon và Chữ nằm trên cùng 1 dòng */
+    .experience_topic {
+        display: flex !important;
+        align-items: center !important; /* Căn giữa icon và chữ theo chiều dọc */
+        gap: 10px !important; /* Khoảng cách giữa icon và chữ */
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        border-bottom: 1px dashed #ccc !important; /* Giữ lại đường gạch chân cho đẹp */
+        padding-bottom: 5px !important;
+    }
+
+    /* 2. Chỉnh lại kích thước icon cho gọn */
+    .topic_icon_wrapper {
+        width: 30px !important;
+        height: 30px !important;
+        margin-bottom: 0 !important; /* Xóa khoảng trống thừa bên dưới icon */
+    }
+
+    .topic_icon {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* 3. Chỉnh lại chữ tiêu đề H3 */
+    .experience_topic h3 {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 16px !important;
+    }
+
+    /* 4. Nén các mục con lên trên để lấy khoảng trống */
+    .experience-item {
+        margin-top: 2px !important;
+        margin-bottom: 5px !important;
+    }
     /* 5. Ép mọi thứ không được tự ý nhảy trang */
     * {
         page-break-inside: avoid !important;
