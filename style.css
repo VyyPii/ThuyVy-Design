@@ -561,45 +561,50 @@ html, body {
     }
 }
 
+/* Đoạn này dùng để điều chỉnh riêng khi in */
 @media print {
-    /* 1. Vô hiệu hóa mọi lệnh ngắt trang */
-    section, .experience-item, .experience_topic {
-        page-break-before: avoid !important;
-        break-before: avoid !important;
+    /* 1. Xóa bỏ hoàn toàn lệnh ngắt trang tự động của trình duyệt */
+    section, div, h3, h4, p, li {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
-        display: block !important;
+        page-break-before: auto !important;
+        page-break-after: auto !important;
     }
 
-    /* 2. Thu hẹp khoảng cách tối đa để nhét vừa 1 trang */
+    /* 2. Thu nhỏ khoảng cách để "nhét" vừa 1 trang A4 */
+    .wrap_page {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
     section {
-        margin-bottom: 15px !important;
-    }
-
-    .experience_topic {
-        margin-top: 15px !important;
-        margin-bottom: 8px !important;
-    }
-
-    .experience-item {
         margin-bottom: 10px !important;
     }
 
-    /* 3. Thu nhỏ chữ một chút để không bị tràn xuống trang 2 */
-    body {
-        font-size: 13px !important;
-        line-height: 1.4 !important;
+    .experience_topic {
+        margin-top: 10px !important;
+        margin-bottom: 5px !important;
     }
 
-    /* 4. Giữ nguyên màu sắc thiết kế */
+    .experience-item {
+        margin-bottom: 5px !important;
+    }
+
+    /* 3. Giảm nhẹ cỡ chữ để tiết kiệm diện tích */
+    body {
+        font-size: 12.5px !important;
+        line-height: 1.3 !important;
+    }
+
+    /* 4. Giữ màu sắc thiết kế và icon */
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* 5. Ép lề giấy A4 cực nhỏ */
+    /* 5. Cài đặt lề giấy A4 sát mép */
     @page {
         size: A4;
-        margin: 5mm 10mm !important;
+        margin: 5mm 8mm !important;
     }
 }
