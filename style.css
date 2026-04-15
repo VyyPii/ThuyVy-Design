@@ -563,48 +563,52 @@ html, body {
 
 /* Đoạn này dùng để điều chỉnh riêng khi in */
 @media print {
-    /* 1. Xóa bỏ hoàn toàn lệnh ngắt trang tự động của trình duyệt */
-    section, div, h3, h4, p, li {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        page-break-before: auto !important;
-        page-break-after: auto !important;
+    /* 1. Loại bỏ mọi khoảng trống thừa của toàn bộ trang */
+    .wrap_page {
+        margin-top: 0 !important; /* Xóa margin top 20px Vy đang để ở image_337cc9.png */
+        padding-top: 0 !important;
     }
 
-    /* 2. Thu nhỏ khoảng cách để "nhét" vừa 1 trang A4 */
-    .wrap_page {
-        margin: 0 !important;
+    /* 2. Co ngắn khoảng cách giữa các Section (Kinh nghiệm, Học vấn, Dự án) */
+    section {
+        margin-bottom: 5px !important; /* Giảm tối đa khoảng cách giữa các cụm lớn */
         padding: 0 !important;
     }
 
-    section {
-        margin-bottom: 10px !important;
-    }
-
+    /* 3. Làm gọn tiêu đề (Chỗ có icon Vali/Mũ cử nhân) */
     .experience_topic {
-        margin-top: 10px !important;
-        margin-bottom: 5px !important;
+        margin-top: 5px !important;
+        margin-bottom: 2px !important;
     }
 
+    .experience_topic h3 {
+        margin: 0 !important;
+        line-height: 1 !important;
+    }
+
+    /* 4. Nén các mục kinh nghiệm nhỏ bên trong */
     .experience-item {
-        margin-bottom: 5px !important;
+        margin-bottom: 2px !important; /* Các công ty sát lại gần nhau hơn */
+        padding-bottom: 0 !important;
     }
 
-    /* 3. Giảm nhẹ cỡ chữ để tiết kiệm diện tích */
-    body {
-        font-size: 12.5px !important;
-        line-height: 1.3 !important;
+    .experience-item h4 {
+        margin-top: 2px !important;
+        margin-bottom: 0 !important;
     }
 
-    /* 4. Giữ màu sắc thiết kế và icon */
+    .experience-item ul {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* 5. Ép mọi thứ không được tự ý nhảy trang */
     * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
     }
 
-    /* 5. Cài đặt lề giấy A4 sát mép */
     @page {
-        size: A4;
-        margin: 5mm 8mm !important;
+        margin: 5mm 10mm !important; /* Lề trên giấy cực mỏng */
     }
 }
