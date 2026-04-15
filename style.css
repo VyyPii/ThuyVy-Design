@@ -562,37 +562,48 @@ html, body {
 }
 
 @media print {
-    /* 1. Ngăn tất cả các khối nhỏ bị cắt đôi dòng chữ */
-    .experience-item {
+    /* 1. Ép tất cả không được ngắt trang */
+    html, body, .wrap_page {
+        height: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* 2. Thu nhỏ khoảng cách giữa các mục để tiết kiệm diện tích */
+    section {
+        margin-bottom: 10px !important; /* Giảm khoảng cách giữa các section */
         page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        display: block !important;
-        margin-bottom: 20px !important;
     }
 
-    /* 2. CHỈ ép phần EDUCATION nhảy sang trang mới (Section thứ 2) */
-    /* Điều này giúp Experience nằm trang 1, còn Education & Project tự sang trang 2 */
-    section:nth-of-type(2) {
-        page-break-before: always !important;
-        break-before: page !important;
-        margin-top: 50px !important; /* Tạo khoảng trống đầu trang mới */
+    .experience_topic {
+        margin-top: 10px !important;
+        margin-bottom: 5px !important;
     }
 
-    /* 3. Phần Project (Section thứ 3) nếu quá dài thì để nó tự xuống trang 3 */
-    section:nth-of-type(3) {
-        page-break-before: auto !important;
-        margin-top: 30px !important;
+    .experience-item {
+        margin-bottom: 8px !important; /* Thu hẹp khoảng cách các công ty */
+        page-break-inside: avoid !important;
     }
 
-    /* 4. Giữ màu sắc icon và font chữ xanh của Vy */
-    .topic_icon, .role, .experience_topic h3 {
+    /* 3. Thu nhỏ chữ một chút để "nhét" vừa 1 trang */
+    body {
+        font-size: 13px !important; /* Giảm nhẹ cỡ chữ tổng thể */
+    }
+
+    h3 { font-size: 16px !important; }
+    h4 { font-size: 14px !important; margin-bottom: 2px !important; }
+    p, li { line-height: 1.3 !important; margin-bottom: 2px !important; }
+
+    /* 4. Giữ màu sắc icon và text */
+    * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* 5. Ép lề trang in chuẩn để không bị sát mép */
+    /* 5. Cấu hình lề trang in cực nhỏ để tối ưu không gian */
     @page {
         size: A4;
-        margin: 15mm 10mm;
+        margin: 8mm 10mm !important;
     }
 }
