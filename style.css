@@ -563,6 +563,7 @@ html, body {
 
 @media print {
 
+  /* ===== PAGE SETUP ===== */
   @page {
     size: A4;
     margin: 10mm;
@@ -573,12 +574,19 @@ html, body {
     padding: 0 !important;
     overflow: visible !important;
     font-size: 12px;
+    line-height: 1.35;
     -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
-  /* ===== FIX LAYOUT GỐC ===== */
+  /* SCALE NHẸ để fit 2 trang */
+  body {
+    zoom: 0.85;
+  }
+
+  /* ===== LAYOUT RESET ===== */
   .cv-container {
-    display: block !important; /* ❗ QUAN TRỌNG NHẤT */
+    display: block !important;
     width: 100% !important;
     max-width: none !important;
     box-shadow: none !important;
@@ -591,19 +599,25 @@ html, body {
     border: none !important;
   }
 
-  /* ===== RESET FLEX/GIRD GÂY LỖI ===== */
-  .skills_container,
-  .skill_item,
-  .experience_topic {
-    display: block !important;
-  }
-
-  /* ===== FIX GRID ===== */
+  /* ===== GRID FIX ===== */
   .interests_grid,
   .abilities-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 8px !important;
+  }
+
+  /* ===== SKILL BAR ===== */
+  .progress_bar {
+    width: 100% !important;
+    height: 5px !important;
+  }
+
+  /* ===== AVATAR ===== */
+  .avatar-container {
+    width: 80px !important;
+    height: 80px !important;
+    border-width: 3px !important;
   }
 
   /* ===== TEXT SCALE ===== */
@@ -616,36 +630,21 @@ html, body {
     line-height: 1.4;
   }
 
-  /* ===== AVATAR ===== */
-  .avatar-container {
-    width: 80px !important;
-    height: 80px !important;
-    border-width: 3px !important;
-  }
-
-  /* ===== SKILL BAR ===== */
-  .progress_bar {
-    width: 100% !important;
-    height: 5px !important;
-  }
-
-  /* ===== SECTION SPACING ===== */
+  /* ===== SPACING GỌN LẠI ===== */
   section {
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
   }
 
-  .experience-item,
-  .education-item,
-  .project_item {
-    page-break-inside: avoid !important;
+  .experience-item {
+    margin-bottom: 6px !important;
   }
 
-  /* ===== FIX ICON TITLE (EXPERIENCE / EDUCATION) ===== */
+  /* ===== FIX ICON + TITLE ===== */
   .experience_topic {
     display: flex !important;
     align-items: center;
     gap: 6px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
   }
 
   .topic_icon_wrapper {
@@ -656,6 +655,20 @@ html, body {
   .experience_topic h3 {
     border: none !important;
     padding: 0 !important;
+  }
+
+  /* ===== PAGE BREAK CONTROL (QUAN TRỌNG) ===== */
+
+  /* Trang 2 bắt đầu từ EXPERIENCE */
+  .experience_topic {
+    page-break-before: always;
+  }
+
+  /* Không cho item bị cắt */
+  .experience-item,
+  .education-item,
+  .project_item {
+    page-break-inside: avoid !important;
   }
 
   /* ===== HIDE KHÔNG CẦN ===== */
