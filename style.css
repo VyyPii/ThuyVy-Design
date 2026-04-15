@@ -562,82 +562,57 @@ html, body {
 }
 
 @media print {
-    /* 1. Thiết lập trang và khử lề trình duyệt */
-    @page {
-        size: A4;
-        margin: 5mm 8mm !important;
+    /* 1. Reset lại để trình duyệt không tự ý tính toán chiều cao sai */
+    html, body {
+        height: auto !important;
+        overflow: visible !important;
     }
 
-    body {
-        font-size: 12px !important;
-        line-height: 1.2 !important;
-        margin: 0 !important;
-        padding: 0 !important;
+    /* 2. Ép các section KHÔNG ĐƯỢC CẮT NGANG */
+    section, 
+    .experience-item, 
+    .education-item,
+    .abilities-grid,
+    .skills_container {
+        display: block !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        position: relative !important;
+        margin-bottom: 20px !important; /* Tạo khoảng cách an toàn */
+    }
+
+    /* 3. Nếu Experience quá dài, cho phép nó ngắt trang nhưng phải đẹp */
+    .experience-item {
+        display: block !important;
+        clear: both;
+    }
+
+    /* 4. Giữ màu sắc tươi tắn */
+    * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* 2. DÙNG GRID: Ép Icon và Chữ không bao giờ được tách hàng */
-    .experience_topic {
-        display: grid !important;
-        grid-template-columns: 30px 1fr !important; /* Cột 1 là icon, cột 2 là chữ */
-        align-items: center !important;
-        gap: 10px !important;
-        margin: 4px 0 !important;
-        border-bottom: 1px dashed #ccc !important;
-        padding-bottom: 2px !important;
-        page-break-inside: avoid !important;
+    /* 5. Ẩn nút gạt Dark Mode để không bị đè lên chữ */
+    .dark-mode-toggle {
+        display: none !important;
     }
 
-    /* Khống chế wrapper icon */
-    .topic_icon_wrapper {
-        display: block !important;
-        width: 30px !important;
-        height: 30px !important;
-        margin: 0 !important;
+    /* 6. Fix lề trang in */
+    @page {
+        size: auto;
+        margin: 15mm 10mm; /* Tăng lề trên dưới để không bị sát mép giấy */
     }
 
-    /* Khống chế tiêu đề h3 */
-    .experience_topic h3 {
-        display: block !important;
-        margin: 0 !important;
-        font-size: 15px !important;
-        white-space: nowrap !important; /* Cấm xuống dòng */
-    }
-
-    /* 3. Nén khoảng cách các mục nội dung cực sâu */
     section {
-        margin-bottom: 5px !important;
-    }
-
-    .experience-item {
-        margin-bottom: 3px !important;
-        page-break-inside: avoid !important;
-    }
-
-    .experience-item h4 {
-        margin: 2px 0 0 0 !important;
-        font-size: 12.5px !important;
-    }
-
-    .experience-item ul {
-        margin: 0 !important;
-        padding-left: 15px !important;
-    }
-
-    .experience-item li {
-        margin-bottom: 1px !important;
-    }
-
-    /* 4. Triệt tiêu mọi yếu tố gây nhảy trang */
-    .wrap_page {
-        margin: 0 !important;
-        padding: 0 !important;
-        display: block !important;
-    }
-
-    * {
+        margin-top: 40px !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
+    }
+
+    /* Nếu Vy có đặt class riêng cho khối đó, hãy thêm vào đây */
+    .experience-section, .experience, #experience {
+        margin-top: 60px !important; /* Đẩy mạnh tay hơn */
+        page-break-before: auto !important;
     }
 }
