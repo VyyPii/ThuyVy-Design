@@ -562,30 +562,37 @@ html, body {
 }
 
 @media print {
-    /* 1. Ép phần EXPERIENCE nhảy sang trang 2 */
-    .experience_topic {
-        page-break-before: always !important;
-        break-before: page !important;
-        margin-top: 40px !important; /* Tạo khoảng trống đầu trang 2 */
-        display: block !important;
-    }
-
-    /* 2. Giữ các công ty không bị cắt đôi giữa chừng */
-    .experience-item {
+    /* 1. Ngăn tất cả các khối nội dung bị cắt đôi dòng chữ */
+    .experience-item, section {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
-        margin-bottom: 25px !important;
         display: block !important;
     }
 
-    /* 3. Đảm bảo màu sắc icon và text xanh được giữ nguyên */
-    .topic_icon, .role, .experience_topic h3 {
+    /* 2. CHỈ ép phần EDUCATION và PROJECT nhảy sang trang mới nếu cần */
+    /* Điều này giúp Experience nằm ở trang 1, còn các phần sau tự động sang trang 2 */
+    section:nth-of-type(2), 
+    section:nth-of-type(3) {
+        page-break-before: auto !important; /* Để trình duyệt tự tính toán chỗ trống */
+    }
+
+    /* 3. Tạo khoảng cách an toàn cho các tiêu đề (Experience, Education, Project) */
+    .experience_topic {
+        margin-top: 30px !important;
+        margin-bottom: 15px !important;
+        /* Giúp tiêu đề không bao giờ nằm một mình ở cuối trang */
+        page-break-after: avoid !important; 
+    }
+
+    /* 4. Giữ màu sắc cho Icon và Role */
+    .topic_icon, .role, h3 {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* 4. Ẩn các thành phần thừa khi in */
-    .dark-mode-toggle {
-        display: none !important;
+    /* 5. Thiết lập lề trang in chuẩn A4 */
+    @page {
+        size: A4;
+        margin: 15mm 10mm;
     }
 }
