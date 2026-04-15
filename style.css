@@ -562,34 +562,29 @@ html, body {
 }
 
 @media print {
-    /* 1. Nhắm đúng vào tiêu đề Experience để đẩy nó xuống trang 2 */
+    /* 1. Đẩy tiêu đề EXPERIENCE sang hẳn trang mới nếu nó nằm quá sát mép */
     .experience_topic {
-        /* Tạo một khoảng trống lớn phía trên để không bị dính mép trang */
-        margin-top: 50px !important; 
-        /* Ép nó phải bắt đầu ở trang mới nếu không đủ chỗ */
-        page-break-before: auto !important; 
+        page-break-before: always !important; /* Luôn bắt đầu Experience ở trang mới */
+        margin-top: 0 !important; /* Reset margin để sát đầu trang 2 cho đẹp */
+        padding-top: 20px !important;
     }
 
-    /* 2. Ép các item kinh nghiệm không được phép bị cắt đôi */
+    /* 2. Giữ tiêu đề đi liền với nội dung bên dưới, không cho chúng tách rời */
+    .experience_topic + .experience-item {
+        page-break-before: avoid !important;
+    }
+
+    /* 3. Ngăn các công ty cụ thể bị cắt đôi dòng chữ */
     .experience-item {
-        display: block !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 15px !important;
+        display: block !important;
     }
 
-    /* 3. Giữ màu xanh lá và màu vali cho đẹp */
+    /* 4. Giữ màu sắc icon vali và chữ xanh */
     .topic_icon, .role {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-    }
-    
-    .wrap_page {
-        margin-top: 20px;
-    }
-    /* 4. Cấu hình lề trang để không bị mất chữ */
-    @page {
-        size: A4;
-        margin: 15mm 10mm;
     }
 }
