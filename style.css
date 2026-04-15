@@ -562,62 +562,82 @@ html, body {
 }
 
 @media print {
+    /* 1. Thiết lập trang và khử lề trình duyệt */
+    @page {
+        size: A4;
+        margin: 5mm 8mm !important;
+    }
 
-  @page {
-    size: A4;
-    margin: 12mm;
-  }
+    body {
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
 
-  html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+    /* 2. DÙNG GRID: Ép Icon và Chữ không bao giờ được tách hàng */
+    .experience_topic {
+        display: grid !important;
+        grid-template-columns: 30px 1fr !important; /* Cột 1 là icon, cột 2 là chữ */
+        align-items: center !important;
+        gap: 10px !important;
+        margin: 4px 0 !important;
+        border-bottom: 1px dashed #ccc !important;
+        padding-bottom: 2px !important;
+        page-break-inside: avoid !important;
+    }
 
-  /* ❗ GIỮ NGUYÊN LAYOUT 2 CỘT */
-  .cv-container {
-    transform: scale(0.85);
-    transform-origin: top center;
-    width: 117%;
-    margin: 0 auto;
-    box-shadow: none !important;
-  }
+    /* Khống chế wrapper icon */
+    .topic_icon_wrapper {
+        display: block !important;
+        width: 30px !important;
+        height: 30px !important;
+        margin: 0 !important;
+    }
 
-  /* ❗ KHÔNG CHO NHẢY BỪA */
-  .experience-item,
-  .education-item {
-    page-break-inside: avoid;
-  }
+    /* Khống chế tiêu đề h3 */
+    .experience_topic h3 {
+        display: block !important;
+        margin: 0 !important;
+        font-size: 15px !important;
+        white-space: nowrap !important; /* Cấm xuống dòng */
+    }
 
-  /* ❗ CHỈ CHIA TRANG 1 LẦN DUY NHẤT */
-  .experience_topic {
-    page-break-before: always;
-  }
+    /* 3. Nén khoảng cách các mục nội dung cực sâu */
+    section {
+        margin-bottom: 5px !important;
+    }
 
-  /* ❗ GIẢM GRID CHO VỪA */
-  .interests_grid,
-  .abilities-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
+    .experience-item {
+        margin-bottom: 3px !important;
+        page-break-inside: avoid !important;
+    }
 
-  /* ❗ GỌN SPACING */
-  section {
-    margin-bottom: 8px !important;
-  }
+    .experience-item h4 {
+        margin: 2px 0 0 0 !important;
+        font-size: 12.5px !important;
+    }
 
-  .experience-item {
-    margin-bottom: 6px !important;
-  }
+    .experience-item ul {
+        margin: 0 !important;
+        padding-left: 15px !important;
+    }
 
-  /* ❗ SKILL BAR */
-  .progress_bar {
-    height: 5px;
-  }
+    .experience-item li {
+        margin-bottom: 1px !important;
+    }
 
-  /* ❗ ẨN NÚT */
-  .dark-mode-toggle {
-    display: none;
-  }
+    /* 4. Triệt tiêu mọi yếu tố gây nhảy trang */
+    .wrap_page {
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
 
+    * {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
 }
