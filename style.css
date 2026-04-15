@@ -562,29 +562,46 @@ html, body {
 }
 
 @media print {
-    /* 1. Ngăn không cho các khối nội dung lớn bị cắt đôi giữa 2 trang */
+    /* 1. Reset lại để trình duyệt không tự ý tính toán chiều cao sai */
+    html, body {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* 2. Ép các section KHÔNG ĐƯỢC CẮT NGANG */
     section, 
     .experience-item, 
     .education-item,
-    .skills_container,
-    .abilities-grid {
+    .abilities-grid,
+    .skills_container {
+        display: block !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
+        position: relative !important;
+        margin-bottom: 20px !important; /* Tạo khoảng cách an toàn */
     }
 
-    /* 2. Đảm bảo màu sắc và hình ảnh được giữ nguyên khi in */
-    body {
+    /* 3. Nếu Experience quá dài, cho phép nó ngắt trang nhưng phải đẹp */
+    .experience-item {
+        display: block !important;
+        clear: both;
+    }
+
+    /* 4. Giữ màu sắc tươi tắn */
+    * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* 3. Ẩn nút Dark Mode khi in để bản PDF sạch sẽ */
+    /* 5. Ẩn nút gạt Dark Mode để không bị đè lên chữ */
     .dark-mode-toggle {
         display: none !important;
     }
 
-    /* 4. Tùy chỉnh lề trang in */
+    /* 6. Fix lề trang in */
     @page {
-        margin: 10mm;
+        size: auto;
+        margin: 15mm 10mm; /* Tăng lề trên dưới để không bị sát mép giấy */
     }
+}  }
 }
