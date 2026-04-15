@@ -1,0 +1,562 @@
+/* RESET MẶC ĐỊNH - Đã sửa để xóa kẽ hở 1px */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BIẾN MÀU SẮC ĐỂ DỄ QUẢN LÝ VÀ LÀM DARK MODE */
+:root {
+    --bg-color: #f1f2f6;        /* Nền tổng thể xanh nhạt */
+    --cv-bg-color: #ffffff;     /* Nền CV trắng */
+    --primary-color: #4CAF50;    /* Xanh lá chính */
+    --secondary-color: #A5D6A7;  /* Xanh lá nhạt cho viền */
+    --outstanding-color: #2E7D32; /* Xanh lá đậm nhấn mạnh */
+    --text-color: #666;          /* Màu chữ chính xám */
+    --title-color: #333;         /* Màu tiêu đề đậm */
+    --title-color1:rgb(59, 45, 45)3;         /* Màu tiêu đề đậm */
+    --border-color: #ccc;
+    --border-style: dashed;      /* Kiểu viền nét đứt giống mẫu */
+    --transition-speed: 0.3s;
+}
+
+/* ĐỊNH NGHĨA MÀU CHO DARK MODE */
+body.dark-mode {
+    --bg-color: #121212;
+    --cv-bg-color: #1e1e1e;
+    
+    /* TRẢ VỀ MÀU HỒNG KHI BẬT DARK MODE */
+    --primary-color: #e5b0b3;    
+    --secondary-color: #f5d1d3;
+    --outstanding-color: #e28b90;
+    
+    --text-color: #bbb;
+    --title-color: #fff;
+    --border-color: #444;
+}
+
+body.dark-mode .interest_item .pink-icon,
+body.dark-mode .abilities-grid .pink-icon
+{
+    filter: invert(86%) sepia(13%) saturate(1063%) hue-rotate(307deg) brightness(94%) contrast(92%);
+}
+
+body.dark-mode .progress_fill {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode .software_logo {
+    /* Đảo ngược màu: đen thành trắng, trắng thành đen */
+    filter: invert(1);
+    
+    /* Có thể tăng một chút độ sáng nếu cần icon trông nổi bật hơn */
+    brightness: 1.1;
+    
+    /* Giảm một chút độ bão hòa nếu icon quá sặc sỡ */
+    saturate: 0.9;
+}
+
+
+.dark-mode-toggle {
+    /* Khóa vị trí cố định */
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+    transform: none !important;
+
+    /* Giao diện mặc định (Light Mode) */
+    background-color: #ffffff !important; /* Nền trắng */
+    border: 1.5px solid #eeeeee !important; /* Viền rất mảnh */
+    
+    /* Tạo hình tròn/quả trám vừa vặn */
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border-radius: 50% !important; /* Biến thành hình tròn */
+    
+    /* Căn giữa icon */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    cursor: pointer !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important;
+    transition: all 0.3s ease;
+}
+
+/* Giao diện khi ở Dark Mode */
+body.dark-mode .dark-mode-toggle {
+    background-color: #1a1a1a !important; /* Nền tối */
+    border-color: #333333 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+}
+
+/* Icon bên trong */
+.moon-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* Hiệu ứng khi di chuột */
+.dark-mode-toggle:hover {
+    transform: scale(1.1) !important; /* Phóng to nhẹ khi hover */
+}
+
+/* ĐỊNH DẠNG BODY VÀ CHỮ CHÍNH */
+body {
+    font-family: 'Roboto', sans-serif; /* Dùng Font Roboto giống mẫu */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all var(--transition-speed);
+}
+
+/* CONTAINER CHÍNH - Chuyển sang Flex để giống mẫu */
+.cv-container {
+    max-width: 800px; /* Tăng chiều rộng để nội dung không bị quá hẹp */
+    margin: 20px auto;
+    background-color: var(--cv-bg-color);
+    display: flex; /* Dùng Flexbox cho 2 cột */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all var(--transition-speed);
+}
+
+/* SIDEBAR (CỘT TRÁI) */
+
+.contact-short a {
+    text-decoration: none; /* Bỏ gạch chân gớm ghiếc */
+    color: inherit;        /* Giữ nguyên màu chữ bạn đang dùng (màu cam/hồng nhạt) */
+    transition: 0.3s;      /* Hiệu ứng mượt khi hover */
+}
+
+/* Hiệu ứng khi di chuột vào (Dành cho máy tính) */
+.contact-short a:hover {
+    color: #ff9a9e;        /* Màu sáng hơn một chút khi hover */
+    opacity: 0.8;
+}
+
+.sidebar {
+    width: 35%; /* Giảm chiều rộng sidebar một chút */
+    padding: 20px;
+    border-right: 2px var(--border-style) var(--border-color); /* Viền nét đứt */
+}
+
+/* PROFILE SECTION TRONG SIDEBAR */
+.profile-section {
+    text-align: center; /* Căn giữa */
+    margin-bottom: 30px;
+}
+
+/* 1. KHUNG BAO NGOÀI: Định hình vòng tròn và viền hồng */
+.avatar-container {
+    width: 120px;           /* Kích thước cố định của vòng tròn */
+    height: 120px;          /* Kích thước cố định của vòng tròn */
+    border-radius: 50%;     /* Bo tròn hoàn hảo */
+    border: 5px solid var(--secondary-color); /* Viền hồng nhạt */
+    overflow: hidden;       /* QUAN TRỌNG: Cắt bỏ phần hình ảnh thừa khi phóng to */
+    position: relative;     /* Thiết lập ngữ cảnh định vị */
+    margin: 0 auto 15px auto; /* Căn giữa */
+}
+
+/* 2. HÌNH ẢNH BÊN TRONG: Thực hiện "zoom" */
+.avatar-img {
+    padding-top: 14px;
+    padding-right: 4px;
+    width: 110%;            /* Chiều rộng bằng khung bao ngoài */
+    height: 110%;           /* Chiều cao bằng khung bao ngoài */
+    object-fit: cover;      /* Giữ đúng tỷ lệ ảnh */
+    
+    /* ĐÂY LÀ CHỖ CHÍNH ĐỂ ZOOM */
+    transform: scale(1.3);  /* Tăng 30% kích thước hình ảnh bên trong (bạn có thể chỉnh con số này) */
+    
+    transition: transform 0.3s ease; /* Hiệu ứng mượt mà (tùy chọn) */
+}
+
+.text-outstanding {
+
+    color: var(--outstanding-color);
+}
+
+.profile-section h1 {
+    font-size: 20px; /* Nhỏ lại cho chuyên nghiệp */
+    color: var(--title-color);
+}
+
+.title {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.contact-short {
+    font-size: 12px;
+    margin-top: 10px;
+    border-bottom: 1px dashed var(--border-color); /* Viền gạch ngang */
+    padding-bottom: 10px;
+}
+
+.slogan {
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* TIÊU ĐỀ MỤC - DẠNG GẠCH NÉT ĐỨT GIỐNG MẪU */
+h3 {
+    color: var(--title-color1);
+    font-size: 16px;
+    border-bottom: 2px var(--border-style) var(--border-color); /* Viền nét đứt ngang */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+/* INTERESTS GRID */
+.interests_section {
+    margin-top: 30px;
+}
+
+/* Tiêu đề có đường gạch nét đứt giống mẫu Regina Julian */
+.interests_section h3 {
+    color: var(--primary-color);
+    border-bottom: 2px dashed #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Lưới hiển thị 2 cột */
+.interests_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia làm 2 cột bằng nhau */
+    gap: 20px; /* Khoảng cách giữa các mục */
+}
+
+/* Từng item sở thích */
+.interest_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Icon sở thích dùng filter để đổi màu hồng */
+.interest_item .pink-icon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 8px;
+    object-fit: contain;
+    /* Mã filter xanh lá đồng bộ với các phần trước */
+   /* Tông xanh lá (Green) phù hợp cho Light Mode */
+    filter: invert(48%) sepia(79%) saturate(467%) hue-rotate(86deg) brightness(100%) contrast(100%);
+}
+
+.interest_item p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--outstanding-color);
+}
+
+/* Software skill */
+
+.skill_item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.software_logo {
+    width: 25px;      /* Kích thước logo nhỏ xinh */
+    height: 25px;
+    object-fit: contain;
+    flex-shrink: 0;   /* Đảm bảo logo không bị bóp méo */
+}
+
+.progress_bar {
+    flex-grow: 1;
+    height: 8px;      /* Thanh progress thanh mảnh hơn cho sang */
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.progress_fill {
+    height: 100%;
+    background-color: var(--secondary-color); /* Màu hồng đặc trưng của Vy */
+    border-radius: 4px;
+}
+
+
+/* MAIN CONTENT (CỘT PHẢI) */
+.main-content {
+    width: 65%; /* Tăng chiều rộng main content */
+    padding: 20px;
+}
+
+/* ABILITIES GRID GIỐNG MẪU */
+.abilities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cột kĩ năng */
+    gap: 15px;
+    text-align: center;
+}
+
+.software_title, .responsive_title {
+    color: var(--primary-color);
+}
+
+/* .ability-item img {
+    width: 50px; height: 50px;
+    margin-bottom: 5px;
+} */
+
+.ability-item {
+    display: flex;
+    flex-direction: column; /* Xếp icon trên, chữ dưới */
+    align-items: center;    /* Căn giữa tất cả theo chiều ngang */
+    text-align: center;     /* Căn giữa dòng chữ */
+    gap: 10px;              /* Khoảng cách giữa icon và chữ */
+}
+
+.ability-item p {
+    font-size: 14px;
+    margin: 0;
+    color: var(--outstanding-color)
+}
+
+/* .ability-icon {
+    width: 50%;
+    height: 50%;
+    color: var(--outstanding-color);
+    filter: invert(86%) sepia(13%) saturate(1063%) hue-rotate(307deg) brightness(94%) contrast(92%);
+} */
+
+.ability-icon .pink-icon {
+    width: 50px;            /* Chỉnh lại kích thước icon cho phù hợp */
+    height: auto;
+    /* color: #e5b0b3; */
+    /* Tông xanh lá (Green) phù hợp cho Light Mode */
+filter: invert(48%) sepia(79%) saturate(467%) hue-rotate(86deg) brightness(100%) contrast(100%);
+    display: block;
+    margin: 0 auto;
+}
+
+/* ĐỊNH DẠNG CÁC MỤC KINH NGHIỆM VÀ HỌC VẤN */
+.experience-item, .education-item {
+    margin-bottom: 20px;
+}
+
+h4 {
+    color: var(--title-color);
+    font-size: 16px;
+}
+
+.date {
+    font-size: 13px;
+    font-style: italic;
+    padding: 4px 0;
+}
+
+.role {
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+.experience-item ul {
+    font-size: 13px;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.experience-item ul li {
+    list-style-type: square;
+}
+
+.experience_topic {
+    display: flex;
+    align-items: center;    /* Căn giữa icon và chữ theo chiều dọc */
+    gap: 15px;              /* Khoảng cách giữa icon và chữ */
+    margin: 21px 0 10px 0;    /* Tăng một chút margin để thoáng hơn */
+    padding-bottom: 10px;   /* Tạo không gian cho đường gạch dưới chữ */
+}
+
+/* KHỐI BAO NGOÀI ICON: Tạo background hình tròn */
+.topic_icon_wrapper {
+    width: 40px;            /* Kích thước vòng tròn cố định */
+    height: 40px;           /* Kích thước vòng tròn cố định */
+    background-color: var(--secondary-color); /* Màu hồng nhạt */
+    border-radius: 50%;     /* Bo tròn hoàn hảo */
+    display: flex;          /* Dùng flex để căn giữa icon bên trong */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;       /* Cắt bỏ phần thừa nếu icon quá to */
+    flex-shrink: 0;         /* Ngăn vòng tròn bị bóp méo khi màn hình thu nhỏ */
+}
+
+/* THẺ IMG ICON: Tuyệt đối không bị méo */
+.experience_topic .topic_icon {
+    width: 60%;             /* Icon chiếm 60% diện tích vòng tròn bao ngoài */
+    height: 60%;            /* Icon chiếm 60% diện tích vòng tròn bao ngoài */
+    object-fit: contain;    /* QUAN TRỌNG: Giữ nguyên tỷ lệ ảnh, không bao giờ bị méo */
+    filter: brightness(0);  /* Tùy chọn: Làm icon thành màu đen đặc nếu file gốc bị xám */
+}
+
+/* TIÊU ĐỀ H3: Thêm đường gạch nét đứt vào đây */
+.experience_topic h3 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.1rem;      /* Chỉnh lại cỡ chữ phù hợp với mẫu */
+    letter-spacing: 1px;    /* Tăng khoảng cách chữ cho giống mẫu */
+    flex-grow: 1;           /* Để tiêu đề chiếm hết khoảng trống còn lại */
+    
+    /* ĐƯỜNG GẠCH NÉT ĐỨT GIỐNG MẪU: Đặt ở đây */
+    border-bottom: 2px dashed #ccc; /* Màu xám nét đứt giống mẫu, bạn có thể thay bằng biến var nếu có */
+    padding-bottom: 5px;   /* Khoảng cách giữa chữ và đường gạch */
+}
+
+/* Education */
+.certi {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--outstanding-color);
+}
+
+/* Project */
+.project_item {
+    font-size: 14px;
+    color: var(--title-color);
+    margin: 10px 0;
+}
+
+/* NÚT BẤM CHUYỂN ĐỔI DARK MODE (TỐI ƯU CHO MOBILE)
+.toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    background-color: var(--toggle-btn-bg);
+    color: var(--toggle-btn-text);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all var(--transition-speed);
+}
+
+.toggle-btn:hover {
+    transform: scale(1.05);
+} */
+
+/* --- RESPONSIVE LOGIC (TỐI ƯU CHO MOBILE) --- */
+
+/* 1. Reset & Base (Đảm bảo không bị tràn ngang trên mobile) */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* 2. Thiết lập cho Tablet & Mobile (Dưới 992px) */
+@media (max-width: 992px) {
+    .cv-container {
+        display: flex;
+        flex-direction: column; /* Chuyển thành 1 cột tổng thể */
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        border-right: none;
+        /* border-bottom: 2px dashed var(--border-color, #eee); */
+        padding: 20px 20px 0px 20px !important;
+    }
+
+    .main-content {
+        width: 100% !important;
+        padding: 0px 20px 10px 20px !important;
+    }
+    
+
+    /* --- PHẦN CHỈNH SỬA CHO INTERESTS 4 CỤM/HÀNG --- */
+    .interests_grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important; /* Ép 4 cụm trên 1 hàng */
+        gap: 10px !important; /* Giảm gap để không bị tràn màn hình */
+        text-align: center;
+    }
+
+    .interest-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Thu nhỏ chữ Interests một chút để 4 cụm nằm vừa chiều ngang tablet/mobile */
+    .interests_grid p {
+        font-size: 10px !important;
+        white-space: nowrap; /* Tránh việc chữ bị nhảy xuống hàng làm xấu layout */
+    }
+}
+
+/* 3. Thiết lập chi tiết cho Mobile (Dưới 768px) */
+@media (max-width: 768px) {
+    /* Interests Grid & Abilities Grid: Luôn giữ 2 cột */
+    .interests_grid, .abilities-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Ép 2 cột trên hàng */
+        gap: 12px !important; /* Thu nhỏ khoảng cách một chút */
+        padding: 0 5px;
+    }
+
+    /* Đảm bảo icon và chữ trong từng item căn giữa */
+    .ability-item, .interest-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Thu nhỏ chữ để không bị tràn dòng khi chia 2 cột */
+    .abilities-grid span, .interests_grid p {
+        font-size: 11px !important;
+        margin-top: 5px;
+    }
+
+    /* Nút Dark Mode: Giữ cố định */
+    .dark-mode-toggle {
+        top: 15px !important;
+        right: 15px !important;
+        width: 38px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* 4. Tối ưu cho màn hình cực nhỏ (Dưới 480px) */
+@media (max-width: 480px) {
+    /* Quan trọng: Vẫn giữ 2 cột thay vì chuyển về 1 cột như cũ */
+    .abilities-grid, .interests_grid {
+        grid-template-columns: repeat(2, 1fr) !important; 
+        gap: 10px !important;
+    }
+
+    /* Thu nhỏ icon lại một chút để hàng 2 cột trông thoáng hơn */
+    .abilities-grid img, .interests_grid img {
+        width: 35px !important;
+        height: auto;
+    }
+
+    .contact-short p {
+        font-size: 0.8rem;
+    }
+
+    .slogan {
+        font-size: 0.85rem !important;
+    }
+}
