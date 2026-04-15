@@ -583,7 +583,10 @@ html, body {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
-
+    
+    .wrap_page {
+        margin-top: 20px;
+    }
     /* 4. Cấu hình lề trang để không bị mất chữ */
     @page {
         size: A4;
