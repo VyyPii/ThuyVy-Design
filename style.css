@@ -560,3 +560,31 @@ html, body {
         font-size: 0.85rem !important;
     }
 }
+
+@media print {
+    /* 1. Ngăn không cho các khối nội dung lớn bị cắt đôi giữa 2 trang */
+    section, 
+    .experience-item, 
+    .education-item,
+    .skills_container,
+    .abilities-grid {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* 2. Đảm bảo màu sắc và hình ảnh được giữ nguyên khi in */
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* 3. Ẩn nút Dark Mode khi in để bản PDF sạch sẽ */
+    .dark-mode-toggle {
+        display: none !important;
+    }
+
+    /* 4. Tùy chỉnh lề trang in */
+    @page {
+        margin: 10mm;
+    }
+}
