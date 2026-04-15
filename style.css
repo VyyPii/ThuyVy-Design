@@ -566,82 +566,104 @@ html, body {
   /* ===== PAGE SETUP ===== */
   @page {
     size: A4;
-    margin: 10mm;
+    margin: 0;
   }
 
   html, body {
     margin: 0 !important;
     padding: 0 !important;
-    overflow: visible !important;
-    font-size: 12px;
-    line-height: 1.35;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    font-family: 'Roboto', sans-serif;
   }
 
-  /* SCALE NHẸ để fit 2 trang */
-  body {
-    zoom: 0.85;
+  /* ===== PAGE WRAPPER (QUAN TRỌNG NHẤT) ===== */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 12mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    background: white;
   }
 
-  /* ===== LAYOUT RESET ===== */
+  .page:last-child {
+    page-break-after: auto;
+  }
+
+  /* ===== LAYOUT TRONG MỖI TRANG ===== */
+  .sidebar {
+    width: 35%;
+    float: left;
+    padding-right: 10px;
+  }
+
+  .main-content {
+    width: 65%;
+    float: right;
+  }
+
+  /* Clear float */
+  .page::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  /* ===== RESET WEB LAYOUT GÂY LỖI ===== */
   .cv-container {
     display: block !important;
-    width: 100% !important;
     max-width: none !important;
     box-shadow: none !important;
   }
 
-  .sidebar,
-  .main-content {
-    width: 100% !important;
-    padding: 0 !important;
-    border: none !important;
+  section {
+    margin-bottom: 10px;
   }
 
-  /* ===== GRID FIX ===== */
-  .interests_grid,
-  .abilities-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px !important;
+  /* ===== TEXT ===== */
+  h1 {
+    font-size: 18px;
   }
 
-  /* ===== SKILL BAR ===== */
-  .progress_bar {
-    width: 100% !important;
-    height: 5px !important;
+  h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 
-  /* ===== AVATAR ===== */
-  .avatar-container {
-    width: 80px !important;
-    height: 80px !important;
-    border-width: 3px !important;
+  h4 {
+    font-size: 13px;
   }
-
-  /* ===== TEXT SCALE ===== */
-  h1 { font-size: 18px; }
-  h3 { font-size: 14px; }
-  h4 { font-size: 13px; }
 
   p, li {
     font-size: 12px;
     line-height: 1.4;
   }
 
-  /* ===== SPACING GỌN LẠI ===== */
-  section {
-    margin-bottom: 8px !important;
+  /* ===== AVATAR ===== */
+  .avatar-container {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
   }
 
-  .experience-item {
-    margin-bottom: 6px !important;
+  /* ===== GRID FIX ===== */
+  .interests_grid,
+  .abilities-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
 
-  /* ===== FIX ICON + TITLE ===== */
+  /* ===== SKILL BAR ===== */
+  .progress_bar {
+    height: 5px;
+    width: 100%;
+  }
+
+  /* ===== EXPERIENCE HEADER ===== */
   .experience_topic {
-    display: flex !important;
+    display: flex;
     align-items: center;
     gap: 6px;
     margin-bottom: 6px;
@@ -653,25 +675,18 @@ html, body {
   }
 
   .experience_topic h3 {
-    border: none !important;
-    padding: 0 !important;
+    border: none;
+    padding: 0;
   }
 
-  /* ===== PAGE BREAK CONTROL (QUAN TRỌNG) ===== */
-
-  /* Trang 2 bắt đầu từ EXPERIENCE */
-  .experience_topic {
-    page-break-before: always;
-  }
-
-  /* Không cho item bị cắt */
+  /* ===== TRÁNH BỊ CẮT NỘI DUNG ===== */
   .experience-item,
   .education-item,
   .project_item {
-    page-break-inside: avoid !important;
+    page-break-inside: avoid;
   }
 
-  /* ===== HIDE KHÔNG CẦN ===== */
+  /* ===== ẨN ELEMENT KHÔNG CẦN ===== */
   .dark-mode-toggle {
     display: none !important;
   }
