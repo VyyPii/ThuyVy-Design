@@ -561,58 +561,70 @@ html, body {
     }
 }
 
+
 @media print {
-    /* 1. Reset lại để trình duyệt không tự ý tính toán chiều cao sai */
-    html, body {
-        height: auto !important;
-        overflow: visible !important;
+    /* 1. ÉP THU NHỎ TRỰC TIẾP TRONG CODE (Thay cho mục Scale) */
+    html {
+        zoom: 0.82 !important; /* Vy chỉnh số này thành 0.8 hoặc 0.75 nếu vẫn thấy 2 trang */
     }
 
-    /* 2. Ép các section KHÔNG ĐƯỢC CẮT NGANG */
-    section, 
-    .experience-item, 
-    .education-item,
-    .abilities-grid,
-    .skills_container {
-        display: block !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        position: relative !important;
-        margin-bottom: 20px !important; /* Tạo khoảng cách an toàn */
+    @page {
+        size: A4;
+        margin: 0 !important;
     }
 
-    /* 3. Nếu Experience quá dài, cho phép nó ngắt trang nhưng phải đẹp */
-    .experience-item {
-        display: block !important;
-        clear: both;
-    }
-
-    /* 4. Giữ màu sắc tươi tắn */
-    * {
+    body {
+        margin: 0 !important;
+        padding: 5mm 10mm !important;
+        background: white !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* 5. Ẩn nút gạt Dark Mode để không bị đè lên chữ */
-    .dark-mode-toggle {
-        display: none !important;
+    /* 2. ÉP ICON VÀ CHỮ LÊN 1 DÒNG (Không dùng Flex nữa, dùng Grid cho chắc) */
+    .experience_topic {
+        display: grid !important;
+        grid-template-columns: 35px 1fr !important; /* Cột 1 là 35px cho icon, còn lại là chữ */
+        align-items: center !important;
+        gap: 10px !important;
+        border-bottom: 1px dashed #ccc !important;
+        margin: 10px 0 5px 0 !important;
+        padding-bottom: 5px !important;
+        width: 100% !important;
     }
 
-    /* 6. Fix lề trang in */
-    @page {
-        size: auto;
-        margin: 15mm 10mm; /* Tăng lề trên dưới để không bị sát mép giấy */
+    .topic_icon_wrapper {
+        display: block !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .topic_icon {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    .experience_topic h3 {
+        margin: 0 !important;
+        padding: 0 !important;
+        white-space: nowrap !important; /* Cấm xuống dòng */
+        font-size: 16px !important;
+    }
+
+    /* 3. XÓA TRANG TRẮNG (Triệt tiêu margin thừa) */
+    .wrap_page {
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     section {
-        margin-top: 40px !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
+        margin-bottom: 5px !important;
     }
 
-    /* Nếu Vy có đặt class riêng cho khối đó, hãy thêm vào đây */
-    .experience-section, .experience, #experience {
-        margin-top: 60px !important; /* Đẩy mạnh tay hơn */
-        page-break-before: auto !important;
+    /* Chống ngắt trang giữa chừng */
+    * {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
     }
 }
